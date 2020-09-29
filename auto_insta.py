@@ -69,39 +69,29 @@ class NavigationInstagram:
         return line
 
     def like_post(driver, count):
-        for x in range(1,4):
-            for y in range(1,4):
-                post=driver.browser.find_elements_by_xpath("/html/body/div[1]/section/main/article/div[1]/div/div/div[{}]/div[{}]/a/div[1]".format(x,y))
-                if len(post)!=0:
-                    post[0].click()
+        keyboard_commands = Keys.TAB
 
-                    time.sleep(5)
+        for x in range(0,12):
+            driver.browser.find_elements_by_xpath('//button[text()="Seguir" or "Follow"]')[0].send_keys("webdriver" + keyboard_commands + Keys.ENTER)
 
-                    like_button=driver.browser.find_elements_by_xpath("/html/body/div[4]/div[2]/div/article/div[3]/section[1]/span[1]/button")
+            time.sleep(2)
 
-                    if len(like_button) != 0:
-                        like_button[0].click()
+            keyboard_commands = keyboard_commands + Keys.TAB
+            like_button = driver.browser.find_elements_by_css_selector("[aria-label='Curtir']")[0].click()
 
-                    """AQUI VAI ENTRAR ANÁLISE SE ATINGIU LIMITE LIKES"""
+            time.sleep(2)
 
-                    time.sleep(5)
+            driver.browser.find_elements_by_xpath('/html')[0].send_keys("webdriver" + Keys.ESCAPE)
 
-                    close = driver.browser.find_elements_by_xpath("/html/body/div[4]/div[3]/button")
-                    if len(close) == 0:
-                        close = driver.browser.find_elements_by_xpath("/html/body/div[3]/div[3]/button")
-                    close[0].click()
-
-                    time.sleep(5)
-
-
-
+            time.sleep(5)
+            
         return count+1
 
 
                 
-#fazer método que entra na pag da hashtag, outro que curte tudo na pagina e um que fica vendo em ql item da lista ta
+
     
-#problema: os full path tão mudando!!!!
+#problema: os full path tão mudando!!!! solucao: usei coisas que n vao mudar nunca como referencia + usei teclas pra navegar
     
 
 
