@@ -7,7 +7,7 @@ from secrets_instagram import username, password
 import time
 import random
 import os
-import datetime
+import datetime as datetime
 
 class GetHashtags:
 
@@ -77,7 +77,12 @@ class NavigationInstagram:
             time.sleep(2)
 
             keyboard_commands = keyboard_commands + Keys.TAB
-            like_button = driver.browser.find_elements_by_css_selector("[aria-label='Curtir']")[0].click()
+            
+            if len(driver.browser.find_elements_by_css_selector("[aria-label='Curtir']")) == 0:
+                if len(driver.browser.find_elements_by_css_selector("[aria-label='Like']")) > 0:
+                    driver.browser.find_elements_by_css_selector("[aria-label='Like']")[0].click()
+            else:
+                driver.browser.find_elements_by_css_selector("[aria-label='Curtir']")[0].click()
 
             time.sleep(2)
 
@@ -86,12 +91,6 @@ class NavigationInstagram:
             time.sleep(5)
             
         return count+1
-
-
-                
-
-    
-#problema: os full path tão mudando!!!! solucao: usei coisas que n vao mudar nunca como referencia + usei teclas pra navegar
     
 
 
@@ -116,100 +115,13 @@ if __name__ == '__main__':
         count = NavigationInstagram.hashtag_page(chrome, hashtags_list, line)
         line = NavigationInstagram.like_post(chrome, count)
 
-
-
-
-    
-
-
-'''account = AccountInstagram(username,password)
-
-dir = os.path.dirname(os.path.realpath(__file__))
-path = dir+"/chromedriver.exe"
-br=webdriver.Chrome(executable_path=path)
-br.get('https://www.instagram.com/accounts/login/')
-time.sleep(5)
-br.find_element_by_name('username').send_keys(account.user)
-br.find_element_by_name('password').send_keys(account.pwd,Keys.ENTER)
-time.sleep(5)
-
-main_list=GetHashtags.update_file()
-count=0
-br.get('https://www.instagram.com')
-time.sleep(3)
-if "Turn on" in br.page_source:
-    x=br.find_element_by_class_name('mt3GC')
-    a=x.find_elements_by_tag_name('button')
-    a[1].click()
-    time.sleep(2)
-count=0
-lul2=1
-xyz=2
-warn = 0
-while xyz==2:
-    lul=0
-    while lul>51 or lul2==1:
-        for i in range(count,len(main_list)):
-            tag=(str(main_list[i]))
-            a=tag.strip()
-            tag=a.lower()
-            a=tag.replace(' ','')
-            tag=a.replace('\n','')
-            a=tag.replace('\t','')
-
-
-            br.get('https://www.instagram.com/explore/tags/'+a)
-            time.sleep(3)
-            for w in range(1,4):
-                for z in range(1,4):
-                    link=br.find_elements_by_xpath("/html/body/div[1]/section/main/article/div[1]/div/div/div[{}]/div[{}]/a/div[1]".format(w,z))
-
-                    link[0].click()
-                    time.sleep(3)
-                    find=br.find_elements_by_xpath("/html/body/div[4]/div[2]/div/article/div[3]/section[1]/span[1]/button")
-                    find[0].click()
-                    time.sleep(2)
-                    if br.find_elements_by_xpath("/html/body/div[5]/div/div/div[2]/button[2]") != []:
-                        find=br.find_elements_by_xpath("/html/body/div[5]/div/div/div[2]/button[2]")
-                        find[0].click()
-                        time.sleep(2)
-                        warn = 5
-                        find=br.find_elements_by_xpath("/html/body/div[4]/div[3]/button")
-                        ue=1
-                        while ue==1:
-                            if len(find)==0:
-                                find=br.find_elements_by_xpath("/html/body/div[4]/div[3]/button")
-                            else:
-                                ue=2
-                        find[0].click()
-                        break
-                    else:
-                        find=br.find_elements_by_xpath("/html/body/div[4]/div[3]/button")
-                        ue=1
-                        while ue==1:
-                            if len(find)==0:
-                                find=br.find_elements_by_xpath("/html/body/div[4]/div[3]/button")
-                            else:
-                                ue=2
-                        find[0].click()
-                        time.sleep(2)
-
-                        lul=lul+1
-                        count=count+1
-                if warn==5:
-                    break
-            if warn==5:
-                break
-        if warn==5:
-                break
-    print("Deu limite em: {} com count {} Esperando 40min.".format(datetime.datetime.now(), count))
-    time.sleep(2400)
-
-
-
-
-#17:12'''
-
+        if count % 6 == 0:                                                      #Here's added a 15 minute timeout after every 72 likes to avoid the account getting blocked for spam.
+            current_time = datetime.datetime.now()
+            timeout_ammount = 900                                               #You can change here the ammount of timeout. DO IT AT YOUR OWN RISK.
+            time_delta = datetime.timedelta(seconds=timeout_ammount)
+            restart_time = (current_time + time_delta).strftime("%H:%M:%S")
+            print("Waiting 15 minutes to not block the account activity. Bot will be up again at {}".format(restart_time))
+            time.sleep(timeout_ammount)
 
 
 
