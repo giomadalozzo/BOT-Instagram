@@ -8,12 +8,40 @@ import time
 import random
 import os
 import datetime as datetime
+import argparse
 
+class ScriptConfig:
+
+    def args():
+        parser = argparse.ArgumentParser(description="Instagram BOT!")
+        parser.add_argument("-d","--driver", required=True, type=str, help="Path to the webdriver executable (remember to include the .exe file on the path).")
+        parser.add_argument("-t","--tags", required=True, type=str, help="Path to the txt that contains the hashtags (remember to include the .txt file on the path).")
+        args = parser.parse_args()
+
+        return args
+
+    def welcome():
+        print("""
+         _____  _   _  _____  _____   ___   _____ ______   ___  ___  ___      _      _____  _   __ _____  _   _  _____      ______  _____  _____ 
+        |_   _|| \ | |/  ___||_   _| / _ \ |  __ \| ___ \ / _ \ |  \/  |     | |    |_   _|| | / /|_   _|| \ | ||  __ \     | ___ \|  _  ||_   _|
+          | |  |  \| |\ `--.   | |  / /_\ \| |  \/| |_/ // /_\ \| .  . |     | |      | |  | |/ /   | |  |  \| || |  \/     | |_/ /| | | |  | |  
+          | |  | . ` | `--. \  | |  |  _  || | __ |    / |  _  || |\/| |     | |      | |  |    \   | |  | . ` || | __      | ___ \| | | |  | |  
+         _| |_ | |\  |/\__/ /  | |  | | | || |_\ \| |\ \ | | | || |  | |     | |____ _| |_ | |\  \ _| |_ | |\  || |_\ \     | |_/ /\ \_/ /  | |  
+         \___/ \_| \_/\____/   \_/  \_| |_/ \____/\_| \_|\_| |_/\_|  |_/     \_____/ \___/ \_| \_/ \___/ \_| \_/ \____/     \____/  \___/   \_/  
+                                                                                                                                         
+                                                           WELCOME TO THE INSTAGRAM LIKING BOT!   
+                              This script uses Selenium automation to like posts on Instagram based on a list of hashtags.
+            This script was made on a educacional purpose and the developer assume no responsibality for any misuse and damage caused by this script.
+                                                                USE IT AT YOUR OWN RISK!   
+
+
+                                                                PRESS ENTER TO CONTINUE...                                                                                                                 
+        """)
+        enter2continue = input()
 class GetHashtags:
 
-    def update_file():
-        path = os.path.dirname(os.path.realpath(__file__))+"/hashtags.txt"
-        with open(path) as f:
+    def update_file(hashtags_path):
+        with open(hashtags_path) as f:
             hashtags_list = f.read().splitlines()
 
         return hashtags_list
@@ -26,8 +54,8 @@ class AccountInstagram:
 
 class WebDriver:
 
-    def __init__(self, path_dir):
-        self.path = path_dir + "/chromedriver.exe"
+    def __init__(self, webdriver_path):
+        self.path = webdriver_path
 
     def start_browser(self):
         browser_on = webdriver.Chrome(executable_path = self.path)
@@ -71,7 +99,7 @@ class NavigationInstagram:
     def like_post(driver, count):
         keyboard_commands = Keys.TAB
 
-        for x in range(0,12):
+        for x in range(0,12):              #Liking 12 posts for each hashtag
             driver.browser.find_elements_by_xpath('//button[text()="Seguir" or "Follow"]')[0].send_keys("webdriver" + keyboard_commands + Keys.ENTER)
 
             time.sleep(2)
@@ -95,13 +123,15 @@ class NavigationInstagram:
 
 
 if __name__ == '__main__':
+    args = ScriptConfig.args()
 
-    hashtags_list = GetHashtags.update_file()
+    ScriptConfig.welcome()
+
+    hashtags_list = GetHashtags.update_file(args.tags)
 
     account = AccountInstagram(username, password)
 
-    driver_path = os.path.dirname(os.path.realpath(__file__))
-    chrome = WebDriver(driver_path)
+    chrome = WebDriver(args.driver)
 
     chrome.start_browser()
 
@@ -120,8 +150,10 @@ if __name__ == '__main__':
             timeout_ammount = 900                                               #You can change here the ammount of timeout. DO IT AT YOUR OWN RISK.
             time_delta = datetime.timedelta(seconds=timeout_ammount)
             restart_time = (current_time + time_delta).strftime("%H:%M:%S")
-            print("Waiting 15 minutes to not block the account activity. Bot will be up again at {}".format(restart_time))
+            print("[INFO] Waiting 15 minutes to not block the account activity. Bot will be up again at {}".format(restart_time))
             time.sleep(timeout_ammount)
+
+    print("\n\nInstagram liking bot ended the hashtag list at {}".format(datetime.datetime.now().strftime("%H:%M:%S")))
 
 
 
