@@ -10,4 +10,4 @@ Automating likes on Instagram using [Selenium](https://www.selenium.dev/) and [C
 pip install -r requirements.txt
 ````
 
- - [Download the ChromeDriver](https://chromedriver.chromium.org/downloads) for your OS and the version of your computer's Google Chrome (You can use other drivers such as Mozilla)
+ - [Download the ChromeDriver](https://chromedriver.chromium.org/downloads) for your OS and the version of your computer's Google Chrome (you can use other drivers such as Mozilla)
