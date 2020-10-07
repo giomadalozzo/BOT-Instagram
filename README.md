@@ -1,6 +1,6 @@
 # Instagram Liking Bot
 
-Automating likes on Instagram using [Selenium](https://www.selenium.dev/) and [ChromeDriver](https://chromedriver.chromium.org/).
+Automating likes on Instagram using [Selenium](https://www.selenium.dev/) and [ChromeDriver](https://chromedriver.chromium.org/). This script was made on a educacional purpose and the developer assume no responsibality for any misuse and damage caused by this script. ***USE IT AT YOUR OWN RISK!***
 
 ## Prerequisites
 
