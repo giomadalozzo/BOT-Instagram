@@ -20,12 +20,14 @@ To run the script, you'll need to give 2 arguments when running the Python code 
 
  - **-t** or **--tags**: Here you'll give the path to the hashtag file;
  - **-d** or **--driver**: Here you'll give the path to the WebDriver file;
+ - **-h** or **--help**: Will show you the options mentioned above.
  
   ```bash
 python auto_insta.py -t foo/foo/hashtags.txt -d foo/foo/chromedriver.exe
-
-or
-
-python auto_insta.py -tags foo/foo/hashtags.txt -driver foo/foo/chromedriver.exe
 ````
- 
+```bash
+python auto_insta.py --tags foo/foo/hashtags.txt --driver foo/foo/chromedriver.exe
+````
+```bash
+ python auto_insta.py -h
+````
