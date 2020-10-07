@@ -5,7 +5,6 @@ from selenium.webdriver.common.action_chains import ActionChains
 from secrets_instagram import username, password
 
 import time
-import random
 import os
 import datetime as datetime
 import argparse
