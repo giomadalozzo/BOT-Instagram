@@ -15,8 +15,8 @@ pip install -r requirements.txt
  - Create a **.txt** file with the hashtags that you want to like the related posts on Instagram (one hashtag per line). You can use the example file **hashtags.txt**
  
 ## Usage
-
-To run the script, you'll need to give 2 arguments when running the Python code at the prompt:
+Enter your Instagram's credentials in the **secrets_instagram.py**
+Then, to run the script, you'll need to give 2 arguments when running the Python code at the prompt:
 
  - **-t** or **--tags**: Here you'll give the path to the hashtag file;
  - **-d** or **--driver**: Here you'll give the path to the WebDriver file;
