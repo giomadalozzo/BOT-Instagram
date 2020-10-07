@@ -10,9 +10,9 @@ Automating likes on Instagram using [Selenium](https://www.selenium.dev/) and [C
 pip install -r requirements.txt
 ````
 
- - [Download the ChromeDriver](https://chromedriver.chromium.org/downloads) for your OS and the version of your computer's Google Chrome (you can use other drivers such as Mozilla Firefox WebDriver)
+ - [Download the ChromeDriver](https://chromedriver.chromium.org/downloads) for your OS and the version of your computer's Google Chrome (you can use other drivers such as Mozilla Firefox WebDriver).
  
- - Create a **.txt** file with the hashtags that you want to like the related posts on Instagram (one hashtag per line). You can use the example file **hashtags.txt**
+ - Create a **.txt** file with the hashtags that you want to like the related posts on Instagram (one hashtag per line). You can use the example file **hashtags.txt**.
  
 ## Usage
 Enter your Instagram's credentials in the **secrets_instagram.py** file. Then, to run the script, you'll need to give 2 arguments when running the Python code at the prompt:
