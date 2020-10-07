@@ -23,5 +23,9 @@ To run the script, you'll need to give 2 arguments when running the Python code 
  
   ```bash
 python auto_insta.py -t foo/foo/hashtags.txt -d foo/foo/chromedriver.exe
+
+or
+
+python auto_insta.py -tags foo/foo/hashtags.txt -driver foo/foo/chromedriver.exe
 ````
  
