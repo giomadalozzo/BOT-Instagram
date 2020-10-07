@@ -6,6 +6,6 @@ Automating likes on Instagram using Selenium and ChromeDriver.
 
  -First of all, you'll need to install the requirements using [pip](https://pip.pypa.io/en/stable/):
  
- '''bash
+ ```bash
 pip freeze -r requirements.txt
-'''
+````
